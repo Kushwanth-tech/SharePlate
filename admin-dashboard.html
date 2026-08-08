@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard | SharePlate</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800&family=Inter:wght@400;500;600&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            background-color: #F1F5F9;
+            padding-top: 80px;
+        }
+
+        .admin-sidebar {
+            position: fixed;
+            top: 80px;
+            left: 0;
+            bottom: 0;
+            width: 250px;
+            background: white;
+            box-shadow: var(--shadow-sm);
+            padding: 24px 0;
+            z-index: 100;
+        }
+
+        .admin-nav-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 16px 24px;
+            color: var(--text-muted);
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        .admin-nav-item:hover,
+        .admin-nav-item.active {
+            background: rgba(41, 128, 185, 0.05);
+            color: var(--primary-blue);
+            border-right: 3px solid var(--primary-blue);
+        }
+
+        .admin-main {
+            margin-left: 250px;
+            padding: 40px;
+        }
+
+        .admin-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 32px;
+        }
+
+        .admin-stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 24px;
+            margin-bottom: 32px;
+        }
+
+        .admin-stat-card {
+            background: white;
+            padding: 24px;
+            border-radius: 12px;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .admin-stat-card h4 {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 8px;
+        }
+
+        .admin-stat-card .value {
+            font-size: 2rem;
+            font-family: 'Outfit', sans-serif;
+            font-weight: 700;
+            color: var(--text-dark);
+        }
+
+        .trend-icon {
+            font-size: 0.8rem;
+            margin-right: 4px;
+        }
+
+        .text-green {
+            color: var(--primary-green);
+        }
+
+        .text-orange {
+            color: var(--accent-orange);
+        }
+
+        .admin-panel {
+            background: white;
+            border-radius: 12px;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            padding: 24px;
+            margin-bottom: 32px;
+        }
+
+        .admin-panel-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 24px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid #E2E8F0;
+        }
+
+        .badge-pending {
+            background: rgba(243, 156, 18, 0.1);
+            color: var(--accent-orange);
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .badge-active {
+            background: rgba(46, 204, 113, 0.1);
+            color: var(--primary-green);
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .btn-sm {
+            padding: 6px 12px;
+            font-size: 0.85rem;
+        }
+
+        .btn-danger-outline {
+            color: #E74C3C;
+            border: 1px solid #E74C3C;
+            background: transparent;
+        }
+
+        .btn-danger-outline:hover {
+            background: #E74C3C;
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar">
+        <div class="container nav-wrapper" style="max-width: 100%;">
+            <a href="index.html" class="logo"><i class="fa-solid fa-plate-wheat"></i> SharePlate <span
+                    style="font-size: 0.9rem; color: var(--text-muted); font-weight: 500; font-family: 'Inter', sans-serif;">|
+                    Admin</span></a>
+            <div class="nav-actions">
+                <div class="author-info">
+                    <div class="author-avatar"><img
+                            src="https://ui-avatars.com/api/?name=Admin+User&background=2C3E50&color=fff" alt="Avatar"
+                            style="width: 40px; height: 40px; border-radius: 50%;"></div>
+                    <span style="font-weight: 600; color: var(--text-dark);">System Admin</span>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="admin-sidebar">
+        <a href="#" class="admin-nav-item active"><i class="fa-solid fa-gauge-high"></i> Dashboard</a>
+        <a href="#" class="admin-nav-item"><i class="fa-solid fa-users"></i> Users & Partners</a>
+        <a href="#" class="admin-nav-item"><i class="fa-solid fa-clipboard-check"></i> Pending Approvals <span
+                class="badge-pending" style="margin-left: auto;">3</span></a>
+        <a href="#" class="admin-nav-item"><i class="fa-solid fa-chart-line"></i> Global Reports</a>
+        <a href="#" class="admin-nav-item"><i class="fa-solid fa-gear"></i> System Settings</a>
+        <a href="index.html" class="admin-nav-item" style="margin-top: auto;"><i
+                class="fa-solid fa-arrow-right-from-bracket"></i> Exit Admin</a>
+    </div>
+
+    <main class="admin-main">
+        <div class="admin-header">
+            <div>
+                <h1 style="font-size: 2rem; margin-bottom: 8px;">Platform Overview</h1>
+                <p style="color: var(--text-muted);">Real-time system metrics and activity.</p>
+            </div>
+            <button class="btn btn-primary"><i class="fa-solid fa-download"></i> Export Report</button>
+        </div>
+
+        <div class="admin-stats-grid">
+            <div class="admin-stat-card">
+                <h4>Total Meals Saved</h4>
+                <div class="value text-green">150,420</div>
+                <div style="font-size: 0.85rem; color: var(--text-muted); margin-top: 8px;">
+                    <span class="text-green"><i class="fa-solid fa-arrow-up trend-icon"></i>12%</span> this month
+                </div>
+            </div>
+            <div class="admin-stat-card">
+                <h4>Active Donors</h4>
+                <div class="value">342</div>
+                <div style="font-size: 0.85rem; color: var(--text-muted); margin-top: 8px;">
+                    <span class="text-green"><i class="fa-solid fa-arrow-up trend-icon"></i>8</span> new this week
+                </div>
+            </div>
+            <div class="admin-stat-card">
+                <h4>Active NGOs</h4>
+                <div class="value">158</div>
+                <div style="font-size: 0.85rem; color: var(--text-muted); margin-top: 8px;">
+                    <span class="text-green"><i class="fa-solid fa-arrow-up trend-icon"></i>3</span> new this week
+                </div>
+            </div>
+            <div class="admin-stat-card">
+                <h4>Failed Pickups</h4>
+                <div class="value text-orange">12</div>
+                <div style="font-size: 0.85rem; color: var(--text-muted); margin-top: 8px;">
+                    <span class="text-orange"><i class="fa-solid fa-arrow-down trend-icon"></i>2%</span> resolving now
+                </div>
+            </div>
+        </div>
+
+        <div class="admin-panel">
+            <div class="admin-panel-header">
+                <h3 style="font-size: 1.2rem;"><i class="fa-solid fa-clipboard-check"></i> Pending Partner Approvals
+                </h3>
+            </div>
+            <div class="table-container">
+                <table class="tracking-table" style="width: 100%;">
+                    <thead>
+                        <tr>
+                            <th>Organization Name</th>
+                            <th>Type</th>
+                            <th>Location</th>
+                            <th>Date Applied</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Rows populated by Javascript -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="admin-panel">
+            <div class="admin-panel-header">
+                <h3 style="font-size: 1.2rem;"><i class="fa-solid fa-bolt"></i> Recent Platform Activity</h3>
+                <a href="#"
+                    style="color: var(--primary-blue); text-decoration: none; font-size: 0.9rem; font-weight: 500;">View
+                    All Activity</a>
+            </div>
+            <div class="table-container">
+                <table class="tracking-table" style="width: 100%;">
+                    <thead>
+                        <tr>
+                            <th>Time</th>
+                            <th>Event Type</th>
+                            <th>Description</th>
+                            <th>Entity</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td style="color: var(--text-muted);">2 mins ago</td>
+                            <td><span class="badge-active"><i class="fa-solid fa-check"></i> Donation Claimed</span>
+                            </td>
+                            <td>Hope Foundation claimed 50kg Produce</td>
+                            <td>Fresh Grocer</td>
+                        </tr>
+                        <tr>
+                            <td style="color: var(--text-muted);">15 mins ago</td>
+                            <td><span
+                                    style="background: rgba(52, 152, 219, 0.1); color: var(--primary-blue); padding: 4px 8px; border-radius: 4px; font-size: 0.8rem; font-weight: 600;"><i
+                                        class="fa-solid fa-plus"></i> New Listing</span></td>
+                            <td>City Bakery posted 30 Servings</td>
+                            <td>City Bakery</td>
+                        </tr>
+                        <tr>
+                            <td style="color: var(--text-muted);">1 hour ago</td>
+                            <td><span class="badge-active"><i class="fa-solid fa-truck-ramp-box"></i> Successful
+                                    Pickup</span></td>
+                            <td>Downtown Shelter marked pickup complete</td>
+                            <td>Italian Bistro</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </main>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const tableBody = document.querySelector('.admin-panel:first-of-type tbody');
+            const pendingBadge = document.querySelector('.badge-pending'); // In sidebar
+
+            // Render Requests
+            const renderRequests = () => {
+                const requests = JSON.parse(localStorage.getItem('shareplate_admin_requests')) || [];
+                const pendingRequests = requests.filter(r => r.status === 'pending');
+
+                // Update badge count
+                if (pendingBadge) {
+                    pendingBadge.innerText = pendingRequests.length;
+                    pendingBadge.style.display = pendingRequests.length > 0 ? 'inline-block' : 'none';
+                }
+
+                tableBody.innerHTML = '';
+
+                if (pendingRequests.length === 0) {
+                    tableBody.innerHTML = '<tr><td colspan="6" style="text-align: center; color: var(--text-muted); padding: 24px;">No pending partner applications.</td></tr>';
+                    return;
+                }
+
+                pendingRequests.forEach(req => {
+                    const row = document.createElement('tr');
+                    row.innerHTML = `
+                        <td>${req.name}</td>
+                        <td>${req.type}</td>
+                        <td>${req.location}</td>
+                        <td>${req.date}</td>
+                        <td><span class="badge-pending">Review Pending</span></td>
+                        <td>
+                            <div style="display: flex; gap: 8px;">
+                                <button class="btn btn-primary btn-sm btn-approve" data-id="${req.id}">Approve</button>
+                                <button class="btn btn-danger-outline btn-sm btn-reject" data-id="${req.id}">Reject</button>
+                            </div>
+                        </td>
+                    `;
+                    tableBody.appendChild(row);
+                });
+
+                attachActionListeners();
+            };
+
+            // Handle Actions
+            const attachActionListeners = () => {
+                document.querySelectorAll('.btn-approve').forEach(btn => {
+                    btn.addEventListener('click', (e) => updateStatus(e.target.getAttribute('data-id'), 'approved'));
+                });
+                document.querySelectorAll('.btn-reject').forEach(btn => {
+                    btn.addEventListener('click', (e) => updateStatus(e.target.getAttribute('data-id'), 'rejected'));
+                });
+            };
+
+            const updateStatus = (idStr, newStatus) => {
+                const id = parseInt(idStr);
+                let requests = JSON.parse(localStorage.getItem('shareplate_admin_requests')) || [];
+
+                requests = requests.map(req => {
+                    if (req.id === id) {
+                        req.status = newStatus;
+                    }
+                    return req;
+                });
+
+                localStorage.setItem('shareplate_admin_requests', JSON.stringify(requests));
+                renderRequests(); // Re-render
+            };
+
+            // Initial render
+            renderRequests();
+
+            // Listen for storage changes from other tabs (e.g. form submission)
+            window.addEventListener('storage', (e) => {
+                if (e.key === 'shareplate_admin_requests') {
+                    renderRequests();
+                }
+            });
+        });
+    </script>
+    <script src="script.js"></script>
+</body>
+
+</html>
