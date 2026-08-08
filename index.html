@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SharePlate | Connecting Surplus Food, Nourishing Communities</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800&family=Inter:wght@400;500;600&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <nav class="navbar">
+        <div class="container nav-wrapper">
+            <a href="#" class="logo"><i class="fa-solid fa-plate-wheat"></i> SharePlate</a>
+            <ul class="nav-links">
+                <li><a href="#how-it-works">How It Works</a></li>
+                <li class="dropdown">
+                    <a href="#dashboard">Dashboards <i class="fa-solid fa-chevron-down"
+                            style="font-size: 0.8rem;"></i></a>
+                    <div class="dropdown-content">
+                        <a href="index.html#dashboard">Donor Dashboard</a>
+                        <a href="ngo-dashboard.html">NGO Portal</a>
+                        <a href="admin-dashboard.html">Admin</a>
+                        <a href="partner-request.html">Partner with Us</a>
+                    </div>
+                </li>
+            </ul>
+            <div class="nav-actions">
+                <a href="#" class="btn btn-outline btn-login-trigger">Log In</a>
+                <a href="#" class="btn btn-primary btn-signup-trigger">Sign Up</a>
+            </div>
+        </div>
+    </nav>
+
+    <header class="hero">
+        <div class="hero-overlay"></div>
+        <div class="container hero-content">
+            <div class="hero-text-content">
+                <h1>Connecting Surplus Food,<br><span>Nourishing Communities</span></h1>
+                <p>A global community fighting hunger and reducing waste, one meal at a time.</p>
+                <div class="hero-buttons">
+                    <a href="#dashboard" class="btn btn-primary btn-large"><i class="fa-solid fa-utensils"></i> Post
+                        Surplus Food</a>
+                    <a href="#dashboard" class="btn btn-secondary btn-large"><i
+                            class="fa-solid fa-hand-holding-heart"></i> Find Available Food</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <section class="impact-section">
+        <div class="container">
+            <div class="impact-grid">
+                <div class="impact-card">
+                    <div class="icon-wrapper green-icon"><i class="fa-solid fa-bowl-food"></i></div>
+                    <h2 class="counter" data-target="150000">0</h2>
+                    <p>Meals Saved</p>
+                </div>
+                <div class="impact-card">
+                    <div class="icon-wrapper blue-icon"><i class="fa-solid fa-leaf"></i></div>
+                    <h2 class="counter" data-target="50000">0</h2>
+                    <p>CO2 Offset (kg)</p>
+                </div>
+                <div class="impact-card">
+                    <div class="icon-wrapper orange-icon"><i class="fa-solid fa-handshake-angle"></i></div>
+                    <h2 class="counter" data-target="500">0</h2>
+                    <p>Partner Organizations</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="how-it-works" class="how-it-works">
+        <div class="container">
+            <div class="section-header">
+                <h2>How It Works</h2>
+                <p>A simple, 3-step process to make a massive impact.</p>
+            </div>
+            <div class="steps-container">
+                <div class="step">
+                    <div class="step-icon"><i class="fa-solid fa-store"></i></div>
+                    <h3>1. Post Surplus Food</h3>
+                    <p>Donors list available surplus quickly, adding details like servings and expiration time.</p>
+                </div>
+                <div class="step-connector"><i class="fa-solid fa-arrow-right"></i></div>
+                <div class="step">
+                    <div class="step-icon"><i class="fa-solid fa-truck-fast"></i></div>
+                    <h3>2. NGOs Claim & Collect</h3>
+                    <p>NGOs track nearby listings, claim the portions they need, and arrange quick pickups.</p>
+                </div>
+                <div class="step-connector"><i class="fa-solid fa-arrow-right"></i></div>
+                <div class="step">
+                    <div class="step-icon"><i class="fa-solid fa-face-smile"></i></div>
+                    <h3>3. Nourish Communities</h3>
+                    <p>Perfectly good food reaches those who need it most, spreading joy and community.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="dashboard" class="dashboard-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Interactive Dashboard</h2>
+                <p>Powerful tools for both donors and NGOs to coordinate food rescue seamlessly.</p>
+            </div>
+            <div class="dashboard-grid">
+                <div class="dashboard-card">
+                    <h3><i class="fa-regular fa-square-plus"></i> Post Surplus Food</h3>
+                    <form class="mock-form">
+                        <div class="form-group">
+                            <label>Food Category</label>
+                            <select>
+                                <option>Prepared Meals</option>
+                                <option>Fresh Produce</option>
+                                <option>Baked Goods</option>
+                            </select>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Servings</label>
+                                <input type="number" placeholder="e.g. 50">
+                            </div>
+                            <div class="form-group">
+                                <label>Best Before</label>
+                                <input type="time">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Location</label>
+                                <div style="display: flex; gap: 8px;">
+                                    <input type="text" id="location-input" placeholder="Enter address..."
+                                        style="flex: 1;">
+                                    <button class="btn btn-outline" id="get-location-btn"
+                                        style="padding: 12px; border-radius: 8px;" title="Use Current Location">
+                                        <i class="fa-solid fa-location-crosshairs"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>Dietary Tags</label>
+                                <div class="tags-input">
+                                    <span class="tag">Vegetarian <i class="fa-solid fa-xmark"></i></span>
+                                    <input type="text" placeholder="Add tag...">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mini-map-placeholder">
+                            <div id="mini-map"></div>
+                            <p class="map-label"><i class="fa-solid fa-location-dot"></i> Drag map or use location
+                                button to set pickup pin.</p>
+                        </div>
+                        <button type="button" class="btn btn-primary w-100">Submit Donation</button>
+                    </form>
+                </div>
+
+                <div class="dashboard-card">
+                    <h3><i class="fa-solid fa-map-location-dot"></i> Available Food Near You</h3>
+                    <div class="filter-bar">
+                        <span class="filter-chip active">All</span>
+                        <span class="filter-chip">Vegetarian</span>
+                        <span class="filter-chip">Hot Meals</span>
+                        <span class="filter-chip">&lt; 5km</span>
+                    </div>
+                    <div id="main-map" class="interactive-map"></div>
+                    <div class="food-list">
+                        <div class="food-item">
+                            <div class="food-details">
+                                <h4>City Bakery</h4>
+                                <p>Assorted Breads & Pastries &bull; 30 Servings</p>
+                                <p class="time-urgent"><i class="fa-regular fa-clock"></i> 2 hours remaining</p>
+                            </div>
+                            <button class="btn btn-outline btn-claim">Claim</button>
+                        </div>
+                        <div class="food-item">
+                            <div class="food-details">
+                                <h4>Green Bowl Cafe</h4>
+                                <p>Lentil Soup (Hot) &bull; 15 Servings</p>
+                                <p class="time-urgent"><i class="fa-regular fa-clock"></i> 1 hour remaining</p>
+                            </div>
+                            <button class="btn btn-outline btn-claim">Claim</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="dashboard-card col-span-2">
+                    <h3><i class="fa-solid fa-list-check"></i> My Donations / Claims</h3>
+                    <div class="table-container">
+                        <table class="tracking-table">
+                            <thead>
+                                <tr>
+                                    <th>Item</th>
+                                    <th>Quantity</th>
+                                    <th>Status</th>
+                                    <th>Partner</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Vegetable Lasagna</td>
+                                    <td>25 Servings</td>
+                                    <td><span class="status-badge status-awaiting">Awaiting Pickup</span></td>
+                                    <td>Downtown Shelter</td>
+                                </tr>
+                                <tr>
+                                    <td>Fresh Produce Box</td>
+                                    <td>50 kg</td>
+                                    <td><span class="status-badge status-picked-up">Picked Up</span></td>
+                                    <td>Community Food Bank</td>
+                                </tr>
+                                <tr>
+                                    <td>Sandwich Platters</td>
+                                    <td>40 Servings</td>
+                                    <td><span class="status-badge status-delivered">Delivered</span></td>
+                                    <td>Hope Foundation</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="dashboard-card col-span-2 analytics-card">
+                    <div class="analytics-header">
+                        <h3><i class="fa-solid fa-chart-pie"></i> Impact Analytics</h3>
+                        <select class="date-select">
+                            <option>This Month</option>
+                            <option>Last Month</option>
+                        </select>
+                    </div>
+                    <div class="analytics-content">
+                        <div class="analytics-stats">
+                            <div class="stat-box">
+                                <h4>Meals Donated</h4>
+                                <p class="stat-number">450</p>
+                                <span class="trend positive"><i class="fa-solid fa-arrow-up"></i> 12% vs last
+                                    month</span>
+                            </div>
+                            <div class="stat-box">
+                                <h4>Total CO2 Offset</h4>
+                                <p class="stat-number">1,200 kg</p>
+                                <span class="trend positive"><i class="fa-solid fa-arrow-up"></i> 8% vs last
+                                    month</span>
+                            </div>
+                        </div>
+                        <div class="chart-area">
+                            <div class="bar-chart">
+                                <div class="bar-col">
+                                    <div class="bar" style="height: 40%"></div><span>Week 1</span>
+                                </div>
+                                <div class="bar-col">
+                                    <div class="bar" style="height: 60%"></div><span>Week 2</span>
+                                </div>
+                                <div class="bar-col">
+                                    <div class="bar" style="height: 50%"></div><span>Week 3</span>
+                                </div>
+                                <div class="bar-col">
+                                    <div class="bar" style="height: 90%"></div><span>Week 4</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="community" class="community-section">
+        <div class="container">
+            <div class="community-content">
+                <div class="image-wrapper">
+                    <img src="https://images.unsplash.com/photo-1593113565214-80afcb4a4771?auto=format&fit=crop&q=80&w=1000"
+                        alt="Volunteers serving food" class="main-image">
+                    <div class="image-badge">
+                        <i class="fa-solid fa-heart"></i>
+                        <span>Real Impact</span>
+                    </div>
+                </div>
+                <div class="testimonials">
+                    <h2>Voices of Our Community</h2>
+                    <div class="testimonial-card">
+                        <i class="fa-solid fa-quote-left quote-icon"></i>
+                        <p>"SharePlate has seamlessly integrated into our restaurant's closing routine. Now, surplus
+                            isn't waste; it's a guaranteed meal."</p>
+                        <div class="author-info">
+                            <div class="author-avatar"><img
+                                    src="https://ui-avatars.com/api/?name=Maria+Santos&background=E67E22&color=fff"
+                                    alt="Avatar"></div>
+                            <div>
+                                <h4>Maria Santos</h4>
+                                <span>Restaurant Owner</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="testimonial-card">
+                        <i class="fa-solid fa-quote-left quote-icon"></i>
+                        <p>"As an NGO, getting fresh, hot meals was a logistical nightmare. SharePlate's real-time map
+                            means we can secure food instantly."</p>
+                        <div class="author-info">
+                            <div class="author-avatar"><img
+                                    src="https://ui-avatars.com/api/?name=David+Kim&background=3498DB&color=fff"
+                                    alt="Avatar"></div>
+                            <div>
+                                <h4>David Kim</h4>
+                                <span>Shelter Director</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container footer-grid">
+            <div class="footer-about">
+                <a href="#" class="logo footer-logo"><i class="fa-solid fa-plate-wheat"></i> SharePlate</a>
+                <p>An innovative platform bridging the gap between food abundance and food insecurity.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fa-brands fa-twitter"></i></a>
+                    <a href="#"><i class="fa-brands fa-linkedin-in"></i></a>
+                    <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                </div>
+            </div>
+            <div class="footer-links">
+                <h4>Platform</h4>
+                <ul>
+                    <li><a href="#">For Donors</a></li>
+                    <li><a href="#">For NGOs</a></li>
+                    <li><a href="partner-request.html" style="color: var(--primary-green); font-weight: 600;">Partner
+                            with Us</a></li>
+                    <li><a href="#">Impact Reports</a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                <h4>Company</h4>
+                <ul>
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">Contact Support</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 SharePlate. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>
