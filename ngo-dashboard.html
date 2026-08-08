@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NGO Dashboard | SharePlate</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800&family=Inter:wght@400;500;600&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            background-color: var(--bg-light);
+            padding-top: 80px;
+        }
+
+        .page-header {
+            background: var(--primary-blue);
+            color: white;
+            padding: 40px 0;
+            margin-bottom: 40px;
+        }
+
+        .page-header h1 {
+            color: white;
+            margin-bottom: 10px;
+        }
+
+        .page-header p {
+            color: rgba(255, 255, 255, 0.8);
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar">
+        <div class="container nav-wrapper">
+            <a href="index.html" class="logo"><i class="fa-solid fa-plate-wheat"></i> SharePlate</a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li class="dropdown">
+                    <a href="#" style="color: var(--primary-green); font-weight: 700;">Dashboards <i
+                            class="fa-solid fa-chevron-down" style="font-size: 0.8rem;"></i></a>
+                    <div class="dropdown-content">
+                        <a href="index.html#dashboard">Donor Dashboard</a>
+                        <a href="ngo-dashboard.html" style="color: var(--primary-green); font-weight: 700;">NGO
+                            Portal</a>
+                        <a href="admin-dashboard.html">Admin</a>
+                        <a href="partner-request.html">Partner with Us</a>
+                    </div>
+                </li>
+            </ul>
+            <div class="nav-actions">
+                <div class="author-info">
+                    <div class="author-avatar"><img
+                            src="https://ui-avatars.com/api/?name=Hope+Foundation&background=3498DB&color=fff"
+                            alt="Avatar" style="width: 40px; height: 40px; border-radius: 50%;"></div>
+                    <span style="font-weight: 600; color: var(--text-dark);">Hope Foundation</span>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="page-header">
+        <div class="container">
+            <h1>NGO Portal</h1>
+            <p>Find available surplus food, track your claims, and view your community impact.</p>
+        </div>
+    </div>
+
+    <section class="dashboard-section" style="padding-top: 0;">
+        <div class="container">
+            <div class="dashboard-grid">
+
+                <!-- Available Food List & Map -->
+                <div class="dashboard-card col-span-2">
+                    <h3><i class="fa-solid fa-map-location-dot"></i> Available Food Near You</h3>
+                    <div class="filter-bar">
+                        <span class="filter-chip active">All</span>
+                        <span class="filter-chip">Vegetarian</span>
+                        <span class="filter-chip">Hot Meals</span>
+                        <span class="filter-chip">&lt; 5km</span>
+                    </div>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px;">
+                        <div id="main-map" class="interactive-map" style="height: 400px; margin-bottom: 0;"></div>
+                        <div class="food-list" style="max-height: 400px; overflow-y: auto; padding-right: 10px;">
+                            <div class="food-item">
+                                <div class="food-details">
+                                    <h4>City Bakery</h4>
+                                    <p>Assorted Breads & Pastries &bull; 30 Servings</p>
+                                    <p class="time-urgent"><i class="fa-regular fa-clock"></i> 2 hours remaining</p>
+                                    <p style="font-size: 0.8rem; margin-top: 4px; color: var(--text-muted);"><i
+                                            class="fa-solid fa-location-dot"></i> 1.2 km away</p>
+                                </div>
+                                <button class="btn btn-outline btn-claim">Claim</button>
+                            </div>
+                            <div class="food-item">
+                                <div class="food-details">
+                                    <h4>Green Bowl Cafe</h4>
+                                    <p>Lentil Soup (Hot) &bull; 15 Servings</p>
+                                    <p class="time-urgent"><i class="fa-regular fa-clock"></i> 1 hour remaining</p>
+                                    <p style="font-size: 0.8rem; margin-top: 4px; color: var(--text-muted);"><i
+                                            class="fa-solid fa-location-dot"></i> 2.5 km away</p>
+                                </div>
+                                <button class="btn btn-outline btn-claim">Claim</button>
+                            </div>
+                            <div class="food-item">
+                                <div class="food-details">
+                                    <h4>Fresh Grocer</h4>
+                                    <p>Imperfect Produce Box &bull; 20 kg</p>
+                                    <p style="color: var(--primary-green); font-weight: 500; margin-top: 4px;"><i
+                                            class="fa-regular fa-clock"></i> Pickup by 8 PM</p>
+                                    <p style="font-size: 0.8rem; margin-top: 4px; color: var(--text-muted);"><i
+                                            class="fa-solid fa-location-dot"></i> 3.0 km away</p>
+                                </div>
+                                <button class="btn btn-outline btn-claim">Claim</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tracking Table -->
+                <div class="dashboard-card col-span-2">
+                    <h3><i class="fa-solid fa-list-check"></i> My Active Claims</h3>
+                    <div class="table-container">
+                        <table class="tracking-table">
+                            <thead>
+                                <tr>
+                                    <th>Item</th>
+                                    <th>Quantity</th>
+                                    <th>Donor</th>
+                                    <th>Pickup Time</th>
+                                    <th>Status</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Vegetable Lasagna</td>
+                                    <td>25 Servings</td>
+                                    <td>Italian Bistro</td>
+                                    <td>Today, 4:30 PM</td>
+                                    <td><span class="status-badge status-awaiting">Awaiting Pickup</span></td>
+                                    <td><button class="btn btn-outline"
+                                            style="padding: 6px 12px; font-size: 0.85rem;">Get Directions</button></td>
+                                </tr>
+                                <tr>
+                                    <td>Fresh Produce Box</td>
+                                    <td>50 kg</td>
+                                    <td>Farm Local</td>
+                                    <td>Today, 10:00 AM</td>
+                                    <td><span class="status-badge status-picked-up">Picked Up</span></td>
+                                    <td><button class="btn btn-outline"
+                                            style="padding: 6px 12px; font-size: 0.85rem;">Mark Delivered</button></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Analytics -->
+                <div class="dashboard-card col-span-2 analytics-card">
+                    <div class="analytics-header">
+                        <h3><i class="fa-solid fa-chart-pie"></i> Our Impact Analytics</h3>
+                        <select class="date-select">
+                            <option>This Month</option>
+                            <option>Last Year</option>
+                        </select>
+                    </div>
+                    <div class="analytics-content">
+                        <div class="analytics-stats">
+                            <div class="stat-box">
+                                <h4>Meals Distributed</h4>
+                                <p class="stat-number" style="color: var(--primary-blue);">3,450</p>
+                                <span class="trend positive"><i class="fa-solid fa-arrow-up"></i> 15% vs last
+                                    month</span>
+                            </div>
+                            <div class="stat-box">
+                                <h4>Families Supported</h4>
+                                <p class="stat-number" style="color: var(--accent-orange);">850</p>
+                                <span class="trend positive"><i class="fa-solid fa-arrow-up"></i> 5% vs last
+                                    month</span>
+                            </div>
+                        </div>
+                        <div class="chart-area">
+                            <div class="bar-chart">
+                                <div class="bar-col">
+                                    <div class="bar" style="height: 40%; background: var(--primary-blue);"></div>
+                                    <span>Week 1</span>
+                                </div>
+                                <div class="bar-col">
+                                    <div class="bar" style="height: 60%; background: var(--primary-blue);"></div>
+                                    <span>Week 2</span>
+                                </div>
+                                <div class="bar-col">
+                                    <div class="bar" style="height: 50%; background: var(--primary-blue);"></div>
+                                    <span>Week 3</span>
+                                </div>
+                                <div class="bar-col">
+                                    <div class="bar" style="height: 90%; background: var(--primary-blue);"></div>
+                                    <span>Week 4</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container footer-grid">
+            <div class="footer-about">
+                <a href="#" class="logo footer-logo"><i class="fa-solid fa-plate-wheat"></i> SharePlate</a>
+                <p>An innovative platform bridging the gap between food abundance and food insecurity.</p>
+            </div>
+            <div class="footer-links">
+                <h4>Platform</h4>
+                <ul>
+                    <li><a href="#">Support Center</a></li>
+                    <li><a href="#">Safety Guidelines</a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                <h4>Legal</h4>
+                <ul>
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">Terms of Service</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p style="text-align: center;">&copy; 2026 SharePlate. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>
